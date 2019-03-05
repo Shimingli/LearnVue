@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     [v-cloak]{
+         display: none;
+     }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <!-- 使用 v-cloak 能够解决 插值表达式闪烁的问题 -->
+     <p v-cloak >-------------{{ msg }}------</p>
+      <!-- v-text 和v-cloak作用差不多 -->
+     <h4 v-text="msg">========</h4>
+     <!-- v-text是默认没有闪烁的问题的 -->
+     <!-- v-text会覆盖元素中原本的内容，但是插值表达式只会替换占位符，不会把整个元素清空 -->
+     
+
+     <div>{{msg2}}</div>
+   
+     <div v-text="msg2"></div>
+      <!-- 这个就可以渲染出来哦 -->
+     <div v-html="msg2"></div>
+    </div>
+    <script src="./lib/vue.min.js"></script>
+    <script>
+    var vm=new Vue({
+      el:'#app',
+      data :{
+          msg:"123" ,
+          msg2:"<h1>我是仕明 我爱学习 </h1>"
+      }
+    })
+    </script>
+    
+</body>
+</html>
