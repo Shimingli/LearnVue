@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="./lib/vue.min.js"></script>
+    <style>
+        .inner {
+            height:30px;
+            background-color: darkblue
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <div class="inner" @Click="divClick">
+            <!-- /stop事件不能給div傳遞事件  -->
+            <input type="button" value="點我" @click.stop="btnClick">
+        </div>
+
+        <!-- 网站一定要写全啊 必须写 http啊 沃日 -->
+        <a href="http://www.baidu.com" @click.prevent="baidu">百度一下</a>
+
+        <!-- capture 先把事件传递给div 然后在给到btn 事件传递变了一个方向 -->
+        <div class="inner" @Click.capture="divClick">
+            <!-- //事件不能給div傳遞事件  -->
+            <input type="button" value="點我" @click.stop="btnClick">
+        </div>
+
+        <!-- 只有点div的时候 我才执行我的点击事件 -->
+        <div class="inner" @Click.self="divClick">
+            <input type="button" value="點我" @click="btnClick">
+        </div>
+
+     <!-- once 事件只触发一次 -->
+        <a href="http://www.baidu.com" @click.prevent.once="baidu">百度一下</a>
+    </div>
+
+
+
+    <script>
+        //    vm实例中，如果想使用data的数据 或者是想调用methods 中的方法，必须通过
+        // this.数据名称  this就是 vm
+        var vm = new Vue({
+            //  这里注意是冒号啊 沃日哦 
+            el: "#app",
+            data: {
+                msg: "你好，仕明同学！！",
+                intervalID: null
+            },
+            methods: {
+                baidu() {
+                    console.log("badiu")
+                },
+                divClick() {
+                    console.log("我是div的點擊事件")
+                },
+                btnClick() {
+                    console.log("我是btn的點擊事件")
+                }
+            }
+        })
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
+
+<!-- .prevent  阻止默认的行为 阻止标签到处跑-->
+
+<!-- capture 先把事件传递给div 然后在给到btn 事件传递变了一个方向 -->
+
+<!-- /stop事件不能給div傳遞事件  -->
+
+
+     <!-- once 事件只触发一次 -->

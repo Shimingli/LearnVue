@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <input type="button" value="动起来" @click="dong">
+        <input type="button" value="不动" @click="budong">
+        <h4>{{ msg }}</h4>
+        <div>{{msg}}</div>
+
+    </div>
+
+
+
+    <script>
+        //    vm实例中，如果想使用data的数据 或者是想调用methods 中的方法，必须通过
+        // this.数据名称  this就是 vm
+        var vm = new Vue({
+            //  这里注意是冒号啊 沃日哦 
+            el: "#app",
+            data: {
+                msg: "你好，仕明同学！！",
+                intervalID:null
+            },
+            methods: {
+                //上面定义的按钮事件必须全部的定义    
+                dong() {
+
+                    // => 等于说是执行外面的函数  箭头函数
+                    //    setInterval(()=>{
+                    //     console.log(this.msg)
+                    //    var start=this.msg.substring(0,1)
+                    //    var end=this.msg.substring(1)
+                    //    this.msg=end+start
+                    //    },400)
+                    //这个有个执行的问题  所以下面和上面是一样的 
+
+                    if(this.intervalID!=null){
+                        return
+                    }
+                    var newThis = this
+                    this.intervalID=setInterval(function () {
+                        console.log(newThis.msg)
+                        var start = newThis.msg.substring(0, 1)
+                        var end = newThis.msg.substring(1)
+                        newThis.msg = end + start
+                    }, 400)
+                },
+                budong() {
+                       clearInterval(this.intervalID)
+                    //    其實代碼邏輯也是差不多的啊 感覺
+                       this.intervalID=null
+                }
+
+            }
+        })
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
