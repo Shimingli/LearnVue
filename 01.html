@@ -10,13 +10,16 @@
     <script src="./lib/vue.min.js"></script>
 </head>
 <body>
+    <!-- Vue控制的元素区域 vue -->
     <div id="app">
      <p>{{ msg }}</p>      
     </div>
     <!-- vue的实力 -->
     <script>
+        // new Vue 就是我们MVVM的VM
      var vm=new Vue({
         el:'#app',
+        // 这里就是MVVM 就是M 保存页面的数据的
         data :{ //
              msg:'我是shiming'
         }

@@ -26,6 +26,19 @@
      <div v-text="msg2"></div>
       <!-- 这个就可以渲染出来哦 -->
      <div v-html="msg2"></div>
+
+
+     <!-- v-bind  是 Vue中，提供用于绑定属性的指令 -->
+     <input type="button"  value="anniu"  v-bind:title="title +'我爱你'">
+
+      <!-- v-bind 可以被简写为 ： v-bind中可以写合法的js
+表达式 -->
+     <input type="button"  value="anniu"  :title="title +'我爱你2222'"  v-on:click="show">
+   
+     <!-- 把鼠标放在上面就会出现一个弹窗 这个比较掉哦 -->
+     <input type="button"  value="阿牛"  :title="title +'我爱你2222'"  v-on:mouseover="show">
+   
+     <input type="button"  value="阿牛"  :title="title +'我爱你2222'"  @click="show">
     </div>
     <script src="./lib/vue.min.js"></script>
     <script>
@@ -33,10 +46,23 @@
       el:'#app',
       data :{
           msg:"123" ,
-          msg2:"<h1>我是仕明 我爱学习 </h1>"
+          msg2:"<h1>我是仕明 我爱学习 </h1>",
+          title:"这是我的title",
+      },
+      methods:{
+         show:function(){
+             alert('把鼠标放在上面就会出现一个弹窗')
+         }
+
       }
     })
     </script>
     
 </body>
 </html>
+
+<!-- 如何定义一个Vue的代码结构  如何定义插值表达式 和  v-text  v-cloak -->
+<!-- v-html -->
+<!-- v-bind  缩写 : -->
+<!-- v-on 时间绑定机制 缩写 @-->
+
