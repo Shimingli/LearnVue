@@ -13,6 +13,10 @@
             height:30px;
             background-color: darkblue
         }
+        .outer{
+            padding:40px;
+            background-color: red
+        }
     </style>
 </head>
 
@@ -40,6 +44,32 @@
 
      <!-- once 事件只触发一次 -->
         <a href="http://www.baidu.com" @click.prevent.once="baidu">百度一下</a>
+
+
+        <div class="outer" @click="divClick">
+                <div class="inner" @click="innerClick">
+                        <input type="button" value="點我dddd" @click="btnClick">
+            
+                    </div>
+
+        </div>
+
+        <div class="outer" @click="divClick">
+                <div class="inner" @click="innerClick">
+                    <!-- 停止往下面传递 -->
+                        <input type="button" value="點我dddd" @click.stop="btnClick">
+            
+                    </div>
+        </div>
+        <!-- self 只会阻止自己身上冒泡行为的触发，并不会真正阻止 冒泡行为 但是stop就可以完全的阻止 -->
+        <div class="outer" @click="divClick">
+                <div class="inner" @click.self="innerClick">
+                    <!-- 停止往下面传递 -->
+                        <input type="button" value="點我dddd" @click="btnClick">
+            
+                    </div>
+
+        </div>
     </div>
 
 
@@ -59,10 +89,13 @@
                     console.log("badiu")
                 },
                 divClick() {
-                    console.log("我是div的點擊事件")
+                    console.log("我是divClick的點擊事件")
                 },
                 btnClick() {
                     console.log("我是btn的點擊事件")
+                },
+                innerClick(){
+                    console.log("我是innerClick的點擊事件")
                 }
             }
         })
@@ -84,4 +117,7 @@
 <!-- /stop事件不能給div傳遞事件  -->
 
 
-     <!-- once 事件只触发一次 -->
+ <!-- once 事件只触发一次 -->  
+ <!-- stop和self的区别 -->
+
+   <!-- self 只会阻止自己身上冒泡行为的触发，并不会真正阻止 冒泡行为 但是stop就可以完全的阻止 -->
