@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="./lib/vue.min.js"></script>
+</head>
+<body>
+   <div id="app">
+
+    <h4>{{msg}}</h4>
+       <!-- 一个输入框 100%的宽度  但是 v-bind只能实现 数据的单项绑定 从m自动绑定到V
+    无法实现数据的双向绑定
+    
+    -->
+    <input type="text"  v-bind:value="msg" style="width: 100%;">
+        <!-- 这个是个输入框，但输入的时候呢，页面上的值也会变，这就可以实现数据的双向绑定了 -->
+    <input type="text"  v-model:value="msg" style="width: 100%;">
+   </div>
+
+   <script>
+    //    这个vm会加载到浏览器的内存中区
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            msg:"shiming tongxue"
+        }
+    })
+   </script>
+</body>
+</html>
+
+<!-- 在浏览器的 console里面输入 window.vm 就可以找到我们代码中赋值，
+当然我们也可以 vm.msg 获取我们代码里面赋值 
+我们也可以改变页面的msg的值 
+vm.msg="new"; 刷新一下 页面就改变额 
+-->
+
+
+<!-- v-model 可以实现表单元素和model 中数据的双向绑定，注意v-model只能运用在表单元素中 
+     input（address email text radio） select checkbox textarea  -->

@@ -1,68 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-     [v-cloak]{
-         display: none;
-     }
+        [v-cloak] {
+            display: none;
+        }
     </style>
 </head>
+
 <body>
     <div id="app">
-       <!-- 使用 v-cloak 能够解决 插值表达式闪烁的问题 -->
-     <p v-cloak >-------------{{ msg }}------</p>
-      <!-- v-text 和v-cloak作用差不多 -->
-     <h4 v-text="msg">========</h4>
-     <!-- v-text是默认没有闪烁的问题的 -->
-     <!-- v-text会覆盖元素中原本的内容，但是插值表达式只会替换占位符，不会把整个元素清空 -->
-     
-
-     <div>{{msg2}}</div>
-   
-     <div v-text="msg2"></div>
-      <!-- 这个就可以渲染出来哦 -->
-     <div v-html="msg2"></div>
+        <!-- 使用 v-cloak 能够解决 插值表达式闪烁的问题 -->
+        <p v-cloak>-------------{{ msg }}------</p>
+        <!-- v-text 和v-cloak作用差不多 -->
+        <h4 v-text="msg">========</h4>
+        <!-- v-text是默认没有闪烁的问题的 -->
+        <!-- v-text会覆盖元素中原本的内容，但是插值表达式只会替换占位符，不会把整个元素清空 -->
 
 
-     <!-- v-bind  是 Vue中，提供用于绑定属性的指令 -->
-     <input type="button"  value="anniu"  v-bind:title="title +'我爱你'">
+        <div>{{msg2}}</div>
 
-      <!-- v-bind 可以被简写为 ： v-bind中可以写合法的js
+        <div v-text="msg2"></div>
+        <!-- 这个就可以渲染出来哦 -->
+        <div v-html="msg2"></div>
+
+
+        <!-- v-bind  是 Vue中，提供用于绑定属性的指令 -->
+        <input type="button" value="anniu" v-bind:title="title +'我爱你'">
+
+        <!-- v-bind 可以被简写为 ： v-bind中可以写合法的js
 表达式 -->
-     <input type="button"  value="anniu"  :title="title +'我爱你2222'"  v-on:click="show">
-   
-     <!-- 把鼠标放在上面就会出现一个弹窗 这个比较掉哦 -->
-     <input type="button"  value="阿牛"  :title="title +'我爱你2222'"  v-on:mouseover="show">
-   
-     <input type="button"  value="阿牛"  :title="title +'我爱你2222'"  @click="show">
+        <input type="button" value="anniu" :title="title +'我爱你2222'" v-on:click="show">
+
+        <!-- 把鼠标放在上面就会出现一个弹窗 这个比较掉哦 -->
+        <input type="button" value="阿牛" :title="title +'我爱你2222'" v-on:mouseover="show">
+
+        <input type="button" value="阿牛" :title="title +'我爱你2222'" @click="show">
     </div>
     <script src="./lib/vue.min.js"></script>
     <script>
-    var vm=new Vue({
-      el:'#app',
-      data :{
-          msg:"123" ,
-          msg2:"<h1>我是仕明 我爱学习 </h1>",
-          title:"这是我的title",
-      },
-      methods:{
-         show:function(){
-             alert('把鼠标放在上面就会出现一个弹窗')
-         }
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "123",
+                msg2: "<h1>我是仕明 我爱学习 </h1>",
+                title: "这是我的title",
+            },
+            methods: {
+                show: function () {
+                    alert('把鼠标放在上面就会出现一个弹窗')
+                }
 
-      }
-    })
+            }
+        })
     </script>
-    
+
 </body>
+
 </html>
 
 <!-- 如何定义一个Vue的代码结构  如何定义插值表达式 和  v-text  v-cloak -->
 <!-- v-html -->
 <!-- v-bind  缩写 : -->
 <!-- v-on 时间绑定机制 缩写 @-->
-
