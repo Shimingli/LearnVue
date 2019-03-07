@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .thin {
+            font-weight: 200;
+        }
+
+        /* 倾斜 */
+        .italic {
+            font-style: italic;
+        }
+
+        /* 间距的 */
+        .active {
+            letter-spacing: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1 class="red thin italic active">大大大大大大大F</h1>
+        <h1 class="red ">大大大大大大大F</h1>
+        <!-- v-bind 绑定属性 但是这样找不到哦 -->
+        <!-- <h1 :class="red">大大大大大大大F</h1> 这样纸是找不到的哦  -->
+
+
+        <!-- 直接传递数据  使用v-bind数据绑定 ，但是没啥优点 -->
+        <h1 :class="['red','italic','active','thin']">大大大大大大大Fdddd</h1>
+
+         <!-- 在数组中使用三元表达式 -->
+        <h1 :class="['red','italic','active',flag?'thin':'']">我是好同学 真的是好同学</h1>
+        <h1 :class="['red','italic','active',flagw?'thin':'']">我是好同学 真的是好同学</h1>
+
+<!-- 使用类 如果标记为true 就加载，不使用的话，就不加载 ，提高代码的可读性 -->
+        <h1 :class="['italic','active',{'red':flag}]">我是好同学 真的是好同学</h1>
+        <h1 :class="['italic','active',{'red':flagw}]">我是好同学 真的是好同学</h1>
+        
+        <!-- 前面是一个类名，后面是一个标识符 使用 v-bind 绑定对象的时候 -->
+        <h1 :class="[{'active':true},{'red':true}]">我是好同学 true真的是好同学</h1>
+        <h1 :class="[{'active':false},{'red':true}]">我是好同学 false真的是好同学</h1>
+        <h1 :class="classObj">我是一个对象保存到里面去的</h1>
+   
+   
+   
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag:true,
+                flagw:false,
+                classObj:{active:false}
+            },
+            methods: {}
+
+        })
+    </script>
+</body>
+
+</html>
