@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+
+         <div>
+           <label>
+               ID:<input type="text" v-model="id">
+           </label>
+           <label>
+                Name:<input type="text" v-model="name">
+            </label>
+         </div>
+         <input type="button" value='添加' @click="add">
+
+        <!-- <p v-for="item in list" >
+            <input type="checkbox">
+            {{item.id}}  ---{{item.name}}
+        </p> -->
+        <!-- 这就就是绑定key  有个疑问？？？现在最新版本的key可以使用对象了啊
+        原来的2.4.0的时候 只能使用 number或者string    key在使用的时候，必须使用v-bind属性绑定的形式，指定key的值 -->
+      <!-- 在组件中循环的时候，v-for 必须指定key值  -->
+        <p v-for="item in list" :key="item" >
+                <input type="checkbox">
+                {{item.id}}  ---{{item.name}}
+            </p>
+    
+    </div>
+
+    <script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            id:"",
+            name:"",
+           list:[
+               {id:1,name:"shiming"},
+               {id:2,name:"shimingai"},
+               ] 
+        },
+        methods:{
+            add(){
+                // 添加 这种方式没有问题
+                // this.list.push({id:this.id,name:this.name})
+                // 这种添加的方式 就有问题了 哈哈 难受哦 原因就是没有key 没有指定那一项被选中了
+                this.list.unshift({id:this.id,name:this.name})
+
+            }
+        }
+
+    })
+    </script>
+</body>
+</html>
