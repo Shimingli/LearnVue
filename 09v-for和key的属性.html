@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="./lib/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <p   v-for="item in list">{{item}}</p>
+
+         <!-- i 就是角标 -->
+        <p   v-for="(item,i) in list">{{item}}----索引值{{i}}---</p>
+
+       
+        <p   v-for="(item,i) in listTwo">{{item}}----索引值{{i}}---</p>
+
+        <p   v-for="use in listTwo">{{use.id}}----索引值{{use.name}}---</p>
+
+        <!--v-for 循环对象 在遍历对象身上的键值对的时候，除了有 val key 在第三个位置还有一个索引 -->
+
+        <p   v-for="(val,key,i) in user">val:{{val}}----key:{{key}}--i:{{i}}-</p>
+
+
+        <!-- v-for迭代数字  in 普通数组，对象，还可以放数字 数字开始的角标是从1开始的
+        骂了隔壁 和java不一样啊 哈哈
+        -->
+        <p   v-for="count in 100">count=={{count}}-</p>
+    </div>
+    
+    <script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            list:[1,12,2,2,2,2,22,234],
+
+            listTwo:[
+               {id:1,name:"1"},
+               {id:2,name:"2"},
+               {id:3,name:"4"},
+            ],
+            user:{
+                id:1,name:"世明",gender:"男"
+                 
+            }
+        }
+    })
+    </script>
+</body>
+</html>
