@@ -1,0 +1,19 @@
+1、MVC 和 MVVM的区别
+2、Vue中的基本代码的结构
+3、插值表达式 v-clock ： 使用 v-cloak 能够解决 插值表达式闪烁的问题   v-text： v-text会覆盖元素中原本的内容，但是插值表达式只会替换占位符，
+            不会把整个元素清空  v-html 里面是个标签就可以渲染出来 
+             v-bind 缩写：是 Vue中，提供用于绑定属性的指令 
+              v-on 缩写  事件绑定机制 缩写 @  v-model 数据双向绑定  v-for循环 v-if v-show 就相当于 invisible 这个控件还在 不会重新创建和删除，只是切换了元素 dispaly：none -->
+ <!-- 如果元素涉及到频换的切换 就是用v-show 
+
+ 4、事件修饰符 ：  .stop .prevent  .capture   .selfe  .once  其实就是事件的传递过程，和安卓差不多
+
+ 5、el 指定要控制的区域  data是个对象，指定了控制的区域要用到的数据， methods 也是个对象，可以直接定义方法
+
+ 6、在Vue中，在vm实力中如果要访问data的数据，带上this，这个和安卓差不多
+
+ 7、v-for中要使用key的属性
+
+ 8、v-model 只能使用与表单元素 
+
+ 9、在Vue中绑定样式的两种方式 v-bind：class   v-bind：style
