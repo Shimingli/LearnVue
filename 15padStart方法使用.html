@@ -63,7 +63,9 @@
                     -->
                     <!-- <td v-text="item.Ctime"></td> -->
 
-                    <td>{{item.Ctime | msgFormat('你好仕明同学')|test}}</td>
+                    <!-- <td>{{item.Ctime | msgFormat('你好仕明同学')|test}}</td> -->
+
+                    <td>{{ item.Ctime | dateFromat("yyyy-mmd-dd") }}</td>
                     <td>
                         <!-- .prevent 阻止默认行为 -->
                         <a href="" @click.prevent="del(item.id)">删除</a>
@@ -75,16 +77,103 @@
 
     </div>
 
+
+    <div id="app2">
+
+
+        {{1+1}}
+
+        {{ dt |dateFromat }}
+
+        <h1> {{ dt |dateFromat }} </h1>
+    </div>
+
+
+    <div id="app3">
+        {{1+1}}
+
+    </div>
     <script>
 
-        Vue.filter("msgFormat", function (msg, args) {
-            return msg + "arg" + args
-        })
-        // 过滤器可以多次调用
 
-        Vue.filter("test", function (msg) {
-            return msg + "test" 
+
+
+        // Vue.filter("msgFormat", function (msg, args) {
+        //     return msg + "arg" + args
+        // })
+        // // 过滤器可以多次调用
+
+        // Vue.filter("test", function (msg) {
+        //     return msg + "test" 
+        // })
+        //   全局过滤器，所有的实例对象都共享了 
+        // 其实这个时间会默认的给与他  pattern="" 以防止调用者不给他赋值
+        Vue.filter("dateFromat", function (date, pattern = "") {
+            var dt = new Date(date);
+            var y = dt.getFullYear();
+            var m = dt.getMonth() + 1
+            var d = dt.getDate()
+            console.log("shiming" + pattern)
+            console.log("shiming" + date)
+            // return `${y}-${m}-${d}`
+
+            // pattern 这个要判断一下是否为null 
+            if (pattern.toLowerCase() === "yyyy-mm-dd") {
+                // return y+"-"+m+"-"+d
+                // 魔法字符串
+                return `${y}-${m}-${d}`
+            } else {
+                var hh = dt.getHours();
+                var mm = dt.getMinutes()
+                var ss = dt.getSeconds()
+
+                return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+            }
         })
+
+        //  要想使全局过滤器生效的话，就必须初始化在 全局过滤器之后
+        var vm2 = new Vue({
+            el: "#app2",
+            data: {
+                dt: new Date()
+            },
+            methods: {
+
+            },
+            // 定义私有过滤器
+            filters: {
+
+                // 调用就近原则，如果全局过滤器和私有过滤器名称一样，作用一样的，
+                // 那么先调用私有的
+                dateFromat: function (date, pattern = "") {
+                    var dt = new Date(date);
+                    var y = dt.getFullYear();
+                    // 有可能是一位数的  padStart(2,"0") 表示长度为2 ，不够的话0来补充
+                    var m = (dt.getMonth() + 1).toString().padStart(2,"0")
+                    var d = dt.getDate().toString().padStart(2,"0")
+                    console.log("shiming" + pattern)
+                    console.log("shiming" + date)
+                    // return `${y}-${m}-${d}`
+
+                    // pattern 这个要判断一下是否为null 
+                    if (pattern.toLowerCase() === "yyyy-mm-dd") {
+                        // return y+"-"+m+"-"+d
+                        // 魔法字符串
+                        return `${y}-${m}-${d}`
+                    } else {
+                        var hh = dt.getHours().toString().padStart(2,"0");
+                        var mm = dt.getMinutes().toString().padStart(2,"0")
+                        var ss = dt.getSeconds().toString().padStart(2,"0")
+
+                        return `${y}-${m}-${d} ${hh}:${mm}:${ss}`+"私有的过滤器"
+                    }
+                }
+            }
+        })
+
+
+
+
         var vm = new Vue({
             el: "#app",
             data: {
@@ -117,11 +206,11 @@
                     //这个就是专门来找id的 
                     var index = this.list.findIndex(item => {
                         if (item.id == id) {
-                            
+
                             return true;
                         }
                     })
-                    this.list.splice(index,1)
+                    this.list.splice(index, 1)
                     console.log("找到的索引 :" + index)
                 },
                 //根据关键字查询集合
