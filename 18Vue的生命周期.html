@@ -15,6 +15,7 @@
         <p>好好学习</p>
 
         <p id="pp">{{ msg }}</p>
+        <input type="button" value="修改msg" @click="msg='我被修改了'">
     </div>
 
 
@@ -54,11 +55,31 @@
             },
             // 8、强内存中编译好的模板，正式的替换到页面中去
             // 9、内存中的模板挂载到页面中，用户可以看到页面的 mounted实例最后的一个生命周期的函数
-            
+            // 只要执行完了mounted，Vue实例已经初始化完毕了，此时已经进入到了运行阶段
             mounted(){
                 console.log("mounted方法")
                 console.log(document.getElementById("pp").innerText)
-            }
+            },
+            // 10、beforeUpdate  最少执行0次，也有可能触发多次，运行中的事件
+            beforeUpdate(){
+                console.log("beforeUpdate方法")
+                // 这个消息还是旧的
+                console.log(document.getElementById("pp").innerText)
+            } ,
+               // 11、 update 最少执行0次，也有可能触发多次，运行中的事件
+            updated(){
+                console.log("updated方法")
+                console.log(document.getElementById("pp").innerText)
+            },
+            // 12、beforeDestory Vue实例就已经从运行阶段进入到销毁阶段，但是此时候实例上所有data和methods，过滤器和指令都是处于可用的状态，还没有执行销毁的过程
+
+            beforeDestroy(){
+                console.log("beforeDestroy方法")
+            },
+            // 13、到这里就全部销毁了
+            destoryed(){
+                console.log("destoryed方法")
+            }   
 
         })
 
