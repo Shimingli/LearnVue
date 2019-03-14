@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <p>好好学习</p>
+
+        <p id="pp">{{ msg }}</p>
+    </div>
+
+
+    <script>
+        // 1、new Vue
+        //2、 init:刚刚初始化了一个Vue实例，只有默认的生命周期函数和默认的事件，其他的没有创建
+
+        var vm = new Vue({
+            el: "#app",
+            // 4、初始化data和methods 
+            data: {
+                msg: "msg消息"
+            },
+            methods: {
+                show() {
+                    console.log("show方法")
+                }
+            },
+            //3、 实例完全被创建出来，会执行他，在这个生命周期函数执行的时候，data和methods的还没有被初始化
+            beforeCreate() {
+                console.log("beforeCreate方法")
+                // 输出为undefined
+                console.log(this.msg)
+            },
+            // 5、created 方法执行，data和methods 初始化好了
+            created() {
+                console.log("created方法")
+                console.log(this.msg)
+            },
+            // 6、Vue 开始编译模板，Vue代码中的指令进行执行，最终在内存中生成一个编译好的最终模板，
+            // 然后把这个模板字符串，渲染为内存中的Dom，此时，只是在内存中，渲染好了模板，并没有把模板挂载到正真的页面中去
+            //   7、内存中已经已经编译完成了，但是没有把模板渲染到页面中
+            beforeMount() {
+                console.log("beforeMount方法")
+                // 就是 输出  innerText {{msg}} 还没有正真的渲染出来，还咩有挂载到页面中去
+                console.log(document.getElementById("pp").innerText)
+            },
+            // 8、强内存中编译好的模板，正式的替换到页面中去
+            // 9、内存中的模板挂载到页面中，用户可以看到页面的 mounted实例最后的一个生命周期的函数
+            
+            mounted(){
+                console.log("mounted方法")
+                console.log(document.getElementById("pp").innerText)
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>
