@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+    <!-- vue-resource 依赖于 Vue 有个先后的顺序  this.$http.get -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="get" @click="getInfo">
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+                getInfo() {
+                    console.log("getInfo")
+
+
+                    // GET /someUrl then返回的数据
+                    this.$http.get('https://cn.vuejs.org/v2/guide/ssr.html').then(response => {
+
+
+                        console.log(response)
+                        // get body data  一般获取body 就可以了
+                        this.someData = response.body;
+                        console.log(this.someData)
+
+
+                    }, response => {
+                        // error callback
+                        console.log(response)
+                    });
+                    
+                    this.$http.post('http://vue.studyit.io/api/post',{},{emulateJSON:true}).then(result=>{
+                        console.log(result.body)
+                    })
+                     
+
+                    // // POST /someUrl
+                    // this.$http.post('/someUrl', { foo: 'bar' }).then(response => {
+
+                    //     // get status
+                    //     response.status;
+
+                    //     // get status text
+                    //     response.statusText;
+
+                    //     // get 'Expires' header
+                    //     response.headers.get('Expires');
+
+                    //     // get body data
+                    //     this.someData = response.body;
+
+                    // }, response => {
+                    //     // error callback
+                    //     console.log("error"+response)
+                    // });
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+     <script>
+// jsonp的实现原理
+// 1、由于浏览器的安全限制，不允许AJAX访问 协议不同，余名不同，端口号不同的数据接口，浏览器认为不安全
+// 2、可以通过动态创建script的标签的形式，把script标签的src属性，指向数据接口的地址，因为script标签不存在跨域限制，这种方式叫做JSONP，JSONP只支持get请求
+// 
+
+         function show(){
+             console.log("我是客服端的方法,但是通过服务器帮我执行的，show方法是服务器帮我调用的")
+         }
+        </script>
+
+        <script src="http://127.0.0.1:3000/getDemo"></script>
+</body>
+</html>
