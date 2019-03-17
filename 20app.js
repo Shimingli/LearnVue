@@ -8,10 +8,15 @@ server.on('request', function (req, res) {
     const url = req.url
 
     console.log("我是服务器，我启动了url==="+url)
+
     if (url === "/getDemo") {
+
         var scrip = "show()"
+
         res.end(scrip)
+
     } else {
+        // 返回404
         res.end("404")
     }
 })

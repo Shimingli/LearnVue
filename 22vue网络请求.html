@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+
+    <!-- vue-resource 依赖于 Vue 有个先后的顺序  this.$http.get -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <!-- 这个包才能一样 -->
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+
+    <!-- 这个是个最新的包 -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+</head>
+
+<body>
+
+    <div id="app">
+
+
+
+
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加</h3>
+            </div>
+            <div class="panel-body form-inline">
+
+
+                <label>
+                    Name:
+                    <input type="text" v-model="name" class="form-control">
+
+                </label>
+
+                <input type="button" value="添加" @click="add" class="btn btn-primary">
+
+
+            </div>
+        </div>
+
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in list" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime}}</td>
+                    <td>
+                        <a href="删除"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+
+                name: "",
+                list: [
+                    { id: 1, name: "宝马", ctime: new Date() },
+                    { id: 2, name: "奔驰", ctime: new Date() }
+                ]
+            },
+            methods: {
+
+                add() {
+
+                },
+                getAllList() {
+                    console.log("方法请求了 getAllList")
+                    this.$http.get("http://vue.studyit.io/api/getprodlist").then(result => {
+                        
+                        if (result.status === 0) {
+
+                        } else {
+                            alert("请求失败");
+                            console.log(result)
+                        }
+                    },response => {
+                        // error callback
+                        alert("请求失败");
+                        console.log("原因：：："+response)
+                    }
+                    )
+                },
+            },
+            created() {
+                console.log("方法请求了 created")
+                this.getAllList() 
+            }
+        }
+        )
+
+    </script>
+
+</body>
+
+</html>
