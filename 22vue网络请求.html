@@ -64,7 +64,9 @@
                     <td>{{item.name}}</td>
                     <td>{{item.ctime}}</td>
                     <td>
-                        <a href="删除"></a>
+                        <!-- 点击这两个删除的区别 -->
+                        <a href="" @click.prevent="del">删除</a>
+                        <a href="">删除</a>
                     </td>
                 </tr>
             </tbody>
@@ -74,6 +76,16 @@
     </div>
 
     <script>
+        // 全局配置地址  
+        // 如果配置了请求的数据接口根域名，在每次单独发起http的时候，也因该是相对路径开头，不能带斜线，否则不会启用根路径拼接
+
+
+        Vue.http.options.root = "http://shiming"
+        //全局启用这个配置
+        Vue.http.options.emulateJSON = true;
+
+
+
         var vm = new Vue({
             el: "#app",
             data: {
@@ -85,31 +97,48 @@
                 ]
             },
             methods: {
-
+                // post
+                // {emulateJSON:true} 以普通表单格式，将数据提交给服务器 application/x-www-form-urlencoded
                 add() {
+                    this.$http.post("", { name: this.name }, { emulateJSON: true }).then(result => {
+                        if (result.body.status === 0) {
+                            //    成功了在获取数据
+                            this.getAllList()
+                            // 清空输入框
+                            this.name = ""
 
+                        } else {
+
+                        }
+                    })
                 },
+                // get
                 getAllList() {
                     console.log("方法请求了 getAllList")
-                    this.$http.get("http://vue.studyit.io/api/getprodlist").then(result => {
-                        
+                    // 如果配置了请求的数据接口根域名，在每次单独发起http的时候，也因该是相对路径开头，不能带斜线，否则不会启用根路径拼接
+                    this.$http.get("api/getprodlist", { headers: { 'Access-Control-Allow-Origin': '*' } }).then(result => {
+
                         if (result.status === 0) {
 
                         } else {
                             alert("请求失败");
                             console.log(result)
                         }
-                    },response => {
+                    }, response => {
                         // error callback
                         alert("请求失败");
-                        console.log("原因：：："+response)
+                        console.log("原因：：：" + response)
                     }
                     )
                 },
+
+                del() {
+
+                }
             },
             created() {
                 console.log("方法请求了 created")
-                this.getAllList() 
+                this.getAllList()
             }
         }
         )
