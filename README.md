@@ -6,3 +6,6 @@
 * [钩子函数参数](https://cn.vuejs.org/v2/guide/custom-directive.html#%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0 "钩子函数参数")
 * [nodejs开发辅助工具nodemon](https://www.cnblogs.com/xiaohuochai/p/8794340.html)
 * [Vue.js 官方](https://cn.vuejs.org/v2/guide/)
+
+* **[animate.css](https://github.com/daneden/animate.css)**
+* [animate.css动画的效果](https://daneden.github.io/animate.css/)

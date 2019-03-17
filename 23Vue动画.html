@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+    <!-- 自定義樣式 -->
+    <style>
+        /* 可以设置不同的进入和离开动画 */
+        /* 设置持续时间和动画函数 */
+        .slide-fade-enter-active {
+            transition: all 3s ease;
+        }
+
+        .slide-fade-leave-active {
+            transition: all 8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+
+        /* 進入的時間 */
+        .slide-fade-enter,
+        .slide-fade-leave-to
+
+        /* .slide-fade-leave-active for below version 2.1.8 */
+            {
+            transform: translateX(900px);
+            opacity: 0;
+        }
+
+
+        /* 可以设置不同的进入和离开动画 */
+        /* 设置持续时间和动画函数 */
+        .my-enter-active {
+            transition: all 3s ease;
+        }
+
+        .my-leave-active {
+            transition: all 8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+
+        /* 進入的時間 */
+        .my-enter,
+        .my-leave-to
+
+        /* .slide-fade-leave-active for below version 2.1.8 */
+            {
+            transform: translateX(100px);
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="example-1">
+        <button @click="show = !show">
+            Toggle render
+        </button>
+
+        <transition name="slide-fade">
+            <p v-if="show">仕明同学</p>
+        </transition>
+        <!-- Vue 提供的 实现动画的话，就必须带上 V- 如果不带的话在transition就不能显示
+        所以我可以在外面显示
+        -->
+        <transition name="my">
+
+            <p v-if="show">仕明同学Copy</p>
+
+        </transition>
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#example-1',
+            data: {
+                show: true
+            }
+        })
+    </script>
+
+</body>
+
+</html>

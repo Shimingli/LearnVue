@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="./lib/vue.min.js"></script>
+    <!-- 使用第三方动画实现的库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+    <style>
+        .ball {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: blueviolet
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <input type="button" value="点我" @click="show=!show">
+<!-- before-enter 动画么有开始，可以设置元素的样式，设置元素的位置 -->
+<!-- enter 表示动画开始之后的样式 -->
+        <transition @before-enter="before" @enter="enter" @after-enter="ater">
+            <div class="ball" v-show="show"></div>
+        </transition>
+
+
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                show: true
+
+            },
+            methods: {
+                // 第一个el参数是一个元素的js对象，
+                // el认为就是document.getElementById 获取到的原生对象
+                before(el) {
+                    console.log("before");
+                    el.style.transform = "translate(0,0)"
+
+                },
+                // 细细体会以下这个done的函数
+                enter(el,done) {
+                    // 这个必须写，要不然出来动画
+                    // 可以认为这个方法强制刷新，位置在偏移
+                    // 以下方法都是可以的
+                    // el.offsetWidth
+                    // el.offsetHeigh
+                    // el.offsetLeft
+                    el.offsetTop
+                    console.log("enter");
+                    el.style.transform = "translate(150px,450px)"
+                    el.style.transition="all 5s ease"
+                //    动画结束的时候消失小球作用的
+                    done()
+                    // done就是ater函数的引用
+                },
+                ater(el) {
+                    console.log("ater");
+                    this.show=!this.show;
+                },
+            }
+
+        })
+    </script>
+</body>
+
+</html>

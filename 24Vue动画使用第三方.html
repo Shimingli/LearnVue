@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+    <!-- 使用第三方动画实现的库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <input type="button" value="按钮" @click="flag=!flag">
+
+        <!-- 需要加animated 在前面 同时前面不能有空格 -->
+        <transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut"  :duration="100">
+
+            <h1 v-if="flag">看我的动画</h1>
+        </transition>
+        <!-- :duration 我咋设置的不管作用啊  -->
+        <!-- duration="毫秒值" 来设置动画的市场  :duration =  -->
+        <transition enter-active-class="animated zoomOutUp" leave-active-class="animated zoomOutDown"  :duration="10000">
+
+            <h1 v-if="flag">看我的动画有时间 </h1>
+        </transition>
+        <transition enter-active-class="animated zoomOutUp" leave-active-class="animated zoomOutDown" >
+
+                <h1 v-if="flag">看我的动画没时间</h1>
+            </transition>
+        <!--  :duration="{ enter: 100, leave:500 }" 设置入场和离场的市场 -->
+        <transition enter-active-class="animated zoomOutLeft" leave-active-class="animated zoomOutRight"
+            :duration="{ enter: 100, leave:500 }">
+
+            <h1 v-if="flag">看我的动画duration</h1>
+        </transition>
+
+
+
+
+    </div>
+
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag: true
+            },
+            methods: {
+
+            }
+
+        })
+    </script>
+</body>
+
+</html>
