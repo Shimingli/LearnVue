@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+         <!-- 3、使用组件，以html标签引入进来 -->
+         <com></com>
+         <!-- 4、驼峰的命名规则，使用my-com来引入，其他的可能有点问题 -->
+         <my-com></my-com>
+    </div>
+    <script>
+        // 1、使用 Vue.extend 组件
+        // var com = Vue.extend({
+        //     template: "<h3>我是一个com组件<h3>"
+        // })
+        // var myCom= Vue.extend({
+        //     template: "<h3>我是一个myCom组件<h3>"
+        // })
+        // 2、使用Vue.component 
+
+        // 组件创建的第三种的方式，就是匿名内部类
+        // 在Vue的上个版本中 tempale必须有且只能有一个根元素，好像现在没有问题了
+          Vue.component("com",{
+            template: "<h3>我是一个com组件<h3><span>123ddd</span>"
+        }) 
+          Vue.component("myCom",{
+            template: "<h3>我是一个com组件<h3>"
+        }) 
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+
+            }
+
+        })
+    </script>
+</body>
+
+</html>
