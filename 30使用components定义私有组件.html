@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        
+        <login></login>
+         <test></test>
+    </div> 
+
+    <template id="temp">
+
+        <h1>我是全局组件，但是我在私有里面引用了的</h1>
+    </template>
+    
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            //单例
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+
+            },
+            filters: {
+
+            },
+            directives: {},
+            //定义私有组件
+            components: {
+              login:{
+                  template:"<h1> 私有组件</h1>"
+              },
+              test:{
+                  //记得加上# 引用
+                    template:"#temp"
+              }
+            },
+            //颜色不一样 
+            beforeCreate() {
+
+            },
+
+
+        })
+    </script>
+</body>
+
+</html>

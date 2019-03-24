@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <tem></tem>
+    </div>
+
+
+    <script>
+
+        Vue.component("tem", {
+            template: "<h1>你要好好学习---{{msg}}---</h1> ",
+            //组件中的data是一个方法，方法内部返回一个对象 
+            data: function () {
+                return {
+                    msg: "组件的data的msg属性"
+                }
+
+            }
+        })
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+
+            },
+        })
+    </script>
+</body>
+
+</html>
