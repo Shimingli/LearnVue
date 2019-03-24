@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <tem></tem>
+        <!-- 当组件应用更多的时候，就会一起改变，肯定是不行 -->
+        <counter></counter>
+        <hr>
+        <counter></counter>
+        <hr>
+        <counter></counter>
+        <hr>
+        <counter></counter>
+    </div>
+
+
+    <!-- 在外面定义组件可以有代码提醒 -->
+    <template id="temp1">
+        <div>
+            <input type="button" value="+1" @click="add">
+            <h3>{{count}}</h3>
+        </div>
+
+    </template>
+
+
+    <script>
+
+        var obj = { count: 0 }
+        //计数器组件，点击按钮，数目加上1 
+        Vue.component("counter", {
+            // 定义组件 一定要命名争取啊 我错了两次了
+            template: "#temp1",
+            data: function () {
+                // 所以这里不能够这样返回
+                // return obj
+                //保证每次单独的返回一个对象
+                return { count: 0 }
+            },
+            methods: {
+                add() {
+                    this.count += 1
+                }
+            }
+        })
+
+        Vue.component("tem", {
+            template: "<h1>你要好好学习---{{msg}}---</h1> ",
+            //组件中的data是一个方法，方法内部返回一个对象 
+            data: function () {
+                return {
+                    msg: "组件的data的msg属性"
+                }
+
+            }
+        })
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+
+            },
+        })
+    </script>
+</body>
+
+</html>
