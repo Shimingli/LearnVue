@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+    <style>
+    .v-enter,
+    .v-leave-to{
+        opacity: 0;
+        transform: translateX(150px)
+    }
+
+    .v-enter-active,
+    .v-leave-active{
+        transition: all 0.5s ease;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div id="app" id="app">
+        <h1>组件的切换</h1>
+
+        <!-- 只能切换两个 尴尬 -->
+        <a href="" @click.prevent="flag=true">登陆</a>
+        <a href="" @click.prevent="flag=false">注册</a>
+
+        <demo1 v-if="flag"></demo1>
+        <demo2 v-else="flag"></demo2>
+         <h1>Vue提供 component ，来展示对应的名称的组件</h1> 
+        <component :is="'demo1'"></component>
+        <h1>组件的切换2</h1>
+
+        <a href="" @click.prevent="name='demo1'">登陆2</a>
+        <a href="" @click.prevent="name='demo2'">注册2</a>
+        <!--Vue提供 component ，来展示对应的名称的组件  -->
+        <!-- componentId 是一个占位符 :is=属性，可以用来展示组件的名称 -->
+     
+<!-- 多个组件的过渡简单很多 - 我们不需要使用 key 特性。相反，我们只需要使用动态组件： -->
+   <!-- 过度的模式mode="out-in" 先out在in -->
+<transition mode="out-in">
+                <component :is="name"></component>
+        </transition>
+    </div>
+    <script>
+        Vue.component("demo1", {
+            template: "<h2>登陆</h2>"
+        })
+        Vue.component("demo2", {
+            template: "<h2>注册</h2>"
+        })
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    flag: true,name:"demo1"
+                }
+            },
+            methods: {
+
+            },
+        })
+    </script>
+</body>
+
+</html>
+
+<!-- Vue的标签 -->
+<!-- component组件  template   transition   transition-group-->

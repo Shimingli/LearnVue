@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+
+    <div id="app" id="app">
+        <h1>组件的切换</h1>
+       
+        <!-- 只能切换两个 尴尬 -->
+        <a href="" @click.prevent="flag=true">登陆</a>
+        <a href="" @click.prevent="flag=false">注册</a>
+        
+        <demo1 v-if="flag"></demo1>
+        <demo2 v-else="flag"></demo2>
+    </div>
+    <script>
+        Vue.component("demo1", {
+           template:"<h2>登陆</h2>"
+        })
+        Vue.component("demo2", {
+           template:"<h2>注册</h2>"
+        })
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                   flag:true
+                }
+            },
+            methods: {
+
+            },
+        })
+    </script>
+</body>
+
+</html>
