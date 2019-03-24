@@ -68,7 +68,10 @@
                 },
                 ater(el) {
                     console.log("ater");
-                    this.show=!this.show;
+                    //this.show=!this.show;
+                    //Vue 把完整的动画，使用钩子函数，拆分了两部分
+                    // 
+                    el.style.opacity=0.5
                 },
             }
 

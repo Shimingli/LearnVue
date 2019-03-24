@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+<!--  -->
+<!-- 子组件传递给父组件值，其实就是父组件传递一个方法，子组件调用方法，然后把值传递给父组件 -->
+<body>
+
+    <div id="app">
+        <!-- 事件绑定机制，v-on 把父组件的show的方法传递给子组件的event-->
+        <!-- v-on 可以简写为 @符号  -->
+        <com2 v-on:event="show"></com2>
+    </div>
+
+    <template id="tmpl">
+
+        <div>
+            <h2>我是tmpl组件</h2>
+            <input type="button" value="点我，可以触发父组件的方法" @click="myDemo">
+        </div>
+    </template>
+    <script>
+        //定义了一个字面量类型的组件模板对象 
+        var com2 = {
+            // 通过制定了一个ID，去加载id的template元素中的内容，当做组件的HTML结构
+            template: "#tmpl",
+            data() {
+                return {
+                    // 对象
+                    ddddd: { name: "仕明同学", age: "18" }
+                }
+            },
+            methods: {
+                myDemo() {
+                    console.log("我是子组件")
+                    // 如何拿到父组件的方法
+                    //emit 愿意就是触发，调用
+                    this.$emit("event", this.ddddd)
+                    this.$emit("event", "我是子组件传递过来的值哦")
+                    this.$emit("event", 123456)
+
+                }
+            },
+        }
+
+        //可以把vm当成一个组件
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                console.log("data我开始执行了")
+                return {
+                    msg: "父组件---我是vue的数据",
+                    shimingForSon: null
+                }
+            },
+            methods: {
+                // 这个data可以让子组件传递参数过来
+                show(data) {
+                    console.log("我是父组件的方法show" + data)
+                    console.log(data)
+                    this.shimingForSon = data
+                    // 為什麼打印不出來這個對象？？？？？ 我已經延遲3s了啊啊啊啊啊
+                     setTimeout(function () {
+                        console.log('执行了');
+                        console.log(shimingForSon)
+                    }, 3000);
+                    // console.log(shimingForSon)
+
+
+                }
+            },
+            components: {
+                com2
+            }
+
+        })
+    </script>
+</body>
+
+</html>
