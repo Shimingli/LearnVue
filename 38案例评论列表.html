@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+    <!-- 注意是rel 啊 -->
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="app">
+            <!-- loaddata的方法是父组件的传递给子组件  -->
+        <box @func="loadData"></box>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="item in list" :key="item.id">
+                <span class="badge">{{item.user}}</span>
+                {{item.content}}
+            </li>
+
+        </ul>
+
+
+
+    </div>
+
+    <template id="tmpl">
+
+        <div>
+            <div class="form-group">
+                <label>人：</label>
+                <textarea class="form-control" v-model="user"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>内容：</label>
+                <textarea class="form-control" v-model="content"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="button" value="发表" @click="add" class="btn btn-primary">
+            </div>
+        </div>
+    </template>
+    <script>
+        var commentBox = {
+            template: "#tmpl",
+            data() {
+                return {
+                    user: "",
+                    content: "",
+
+                }
+            },
+            methods: {
+                add() {
+                    console.log("点击组件的")
+                    // 数据存放到了 localStorage中去了 
+                    // 组织一个最新的评论数据对选哪个
+                    // 把对象存储到localStorage中去
+                    // 注意 localStorage中支持存放字符串数据，先调用 JSON.stringify
+                    // 注意  数据完整性，新加的数据要和旧的数据一起存储  
+                    // 注意 如果数据不存在的话，就直接返回一个空的数组
+                    // 注意单词千万不要写错了啊
+                    var commentqq = {
+                        id: Date.now(), user: this.user, content: this.content
+                    }
+                    // 从本地获取数据
+                    var strdata = localStorage.getItem("cmts") || "[]"
+                    var list = JSON.parse(strdata)
+                    // 注意顺序
+                    // list.push(commentqq)
+                    // 就是把数据添加到首部 
+                    list.unshift(commentqq)
+
+                    //  保存数据到本地
+
+                    localStorage.setItem("cmts", JSON.stringify(list))
+
+                    // 清空数据
+                    this.user = this.content = ""
+                    console.log("点击组件的 end" + list + this.user)
+
+                    // 点击完了 我需要刷新数据
+
+                    // func  是父组件传递过来的方法  子组件来触发这个方法
+                    this.$emit("func")
+                }
+            },
+        }
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                list: [
+                    { id: Date.now(), user: "shiming", content: "text" },
+                    { id: Date.now(), user: "shiming1", content: "text1" },
+                    { id: Date.now(), user: "shiming2", content: "text2" }
+                ]
+            },
+            methods: {
+                loadData() {
+                    var strdata = localStorage.getItem("cmts") || "[]"
+                    var list = JSON.parse(strdata)
+                    this.list = list
+                }
+            },
+            //初始化好了
+            created() {
+                this.loadData()
+            },
+            components: {
+                "box": commentBox
+            }
+        })
+    </script>
+
+</body>
+
+</html>
