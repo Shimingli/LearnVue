@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="./lib/vue.min.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <input type="button" value="获取元素" @click="getElement" ref="btn">
+
+        <!-- ref 可以指定 原生的DOM对象 -->
+        <h3 id="id_h3" ref="id_h3">你好啊</h3>
+        <hr>
+        <!-- 组件也可以使用 -->
+         <login ref="myLogin"></login>
+        
+    </div>
+ 
+
+    <template id="login">
+        <h1>登陆</h1>
+    </template>
+    <script>
+
+        var login = {
+            template: "#login",
+            data() {
+                return {
+                    msg:"我是组件"
+                }
+            },    
+            methods: {
+                show(){
+                    console.log("调用了子组件的方法")
+                }
+            },
+        }
+        var vm = new Vue({
+            el: "#app",
+
+            data: {
+
+            },
+
+            methods: {
+                getElement() {
+                    // 通过id获取DOM元素 ，但是Vue不推荐
+                    // <h3 id="id_h3">你好啊</h3>
+                    console.log(document.getElementById("id_h3"))
+
+
+                    console.log("我是Vue中获取DOM元素的对象的方法")
+                    //  输出你好  我擦 牛逼
+                    // ref 是 reference 
+                    console.log(this.$refs.id_h3.innerText)
+
+                    // 获取子组件中的 data
+                    console.log(this.$refs.myLogin.msg)
+
+                    // 调用子组件的方法
+                    this.$refs.myLogin.show()
+
+                }
+            },
+
+            components:{
+               "login":login
+              
+            }
+        })
+    </script>
+</body>
+
+</html>
