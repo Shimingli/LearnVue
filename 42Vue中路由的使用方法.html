@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- vue路由 -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <style>
+        /* 实现路由的文字的颜色 */
+      .router-link-active{
+          color: red;
+          font-weight: 800;
+          /* 倾斜 */
+          font-style: italic;
+          /* 大小 */
+          font-size: 100px;
+          /* 下划线 */
+          text-decoration: underline;
+          /* 背景色 */
+        background-color: goldenrod
+      }
+      .myStyle{
+          color:hotpink;
+      }
+
+      .v-enter,
+      .v-leaver-to{
+          opacity: 0;
+          transform: translateX(100px);
+        
+      }
+      .v-enter-active,
+      .v-leaver-active{
+          transition: all 0.5s ease;
+      }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <!--不推荐这样使用 -->
+        <!-- <a href="#/login">登陆</a>
+        <a href="#/register">注册</a> -->
+
+        <!-- router-link 默认渲染为a标签  tag指定渲染成什么标签-->
+        <router-link to="/login" tag="span">登陆</router-link>
+        <router-link to="/register">注册</router-link>
+        <!-- 这是 vue-router中提供的元素，专门用来站位使用 -->
+<!-- 包裹动画  mode="out-in"动画的加载的方式-->
+        <transition mode="out-in">
+                <router-view></router-view>
+        </transition>
+      
+
+
+    </div>
+
+    <script>
+        var login = {
+            template: "<h1>我是登陆组件</h1>"
+        }
+        var register = {
+            template: "<h1>我是注册组件</h1>"
+        }
+        const router = new VueRouter({
+            // 表示路由匹配的规则  
+            routes: [
+
+                // path 表示监听那个路由连接的地址
+                // component 百世路由前面匹配到的path，展示相对的应的那个组件
+                // component 必须是一个组件的模板对象，不能是组件应用的名称
+
+                //  指定默认的为登陆，但是不推荐啊 
+                //  {path:"/",component:login},
+                // redirect进入页面的时候，直接就去login组件的页面
+                { path: "/", redirect: "/login" },
+                { path: "/login", component: login },
+
+                { path: "/register", component: register }
+
+            ],
+            // 默认值: "router-link-active"
+
+            // 设置 链接激活时使用的 CSS 类名。默认值可以通过路由的构造选项 linkActiveClass 来全局配置。
+        //    改成自己的想要的样式
+            linkActiveClass:"myStyle"
+
+        })
+
+
+        var vm = new Vue({
+            el: "#app",
+
+            data: {
+
+            },
+
+            methods: {
+
+            },
+            // 将路由规则对象，注册到vm实例上，用来监听URL对象的地址的变化。然后展示相对应的组件
+            router: router
+        })
+    </script>
+</body>
+
+</html>
