@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- vue路由 -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <style>
+        /* 设置html页面中的 body边距  */
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+        }
+        /* h1 标签没有逗号哦 记住哦 */
+        h1{
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+        }
+        .header {
+            background-color: aqua;
+            height: 100px;
+        }
+
+        .left {
+            background-color: yellow;
+            flex: 2;
+            height: 600px;
+        }
+
+        .main {
+            background-color: blueviolet;
+            flex: 10;
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- 3个坑 -->
+        <router-view></router-view>
+        <div class="container">
+
+            <router-view name="left"></router-view>
+
+            <router-view name="main"></router-view>
+        </div>
+
+    </div>
+
+    <script>
+
+        var header = {
+            template: "<h1 class='header'>Header 头部</h1>"
+        }
+        var leftBox = {
+            template: "<h1 class='left'>left 侧边栏</h1>"
+        }
+        var mainBox = {
+            template: "<h1 class='main'>mainBox 主体区域</h1>"
+        }
+
+        const router = new VueRouter({
+            routes: [
+                // 这种方法不能实现 
+                // {path:"/",component:header},
+                // {path:"/left",component:left},
+                // {path:"/mainBox",component:mainBox},
+                //  components 对应很多的组件
+                {
+                    path: "/", components: {
+                        "default": header,
+                        "left": leftBox,
+                        "main": mainBox
+                    }
+                }
+            ]
+        })
+
+        var vm = new Vue({
+            el: "#app",
+
+            data: {
+
+            },
+
+            methods: {
+
+            },
+            // router名字一样 可以简写哦
+            router
+        })
+    </script>
+</body>
+
+</html>
