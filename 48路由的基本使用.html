@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- vue路由 1、导入包 -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <style>
+        .myactive {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <router-link to="/login">登陆</router-link>
+        <router-link to="/register">注册</router-link>
+        <!-- 4、放入容器 -->
+        <router-view></router-view>
+    </div>
+
+    <script>
+        // 2、创建子组件
+        var login = {
+            template: "<h3> 我是登陆</h3>"
+        }
+        var register = {
+            template: "<h3> 我是注册</h3>"
+        }
+        // 3、创建路由对象
+        const router = new VueRouter({
+            // 路由规则数组
+            routes: [
+                // 指定根路径，为登陆
+                {path:"/",redirect:"/login"},
+                { path: "/login", component: login },
+                { path: "/register", component: register }
+            ],
+            // 指定自己的样式
+            linkActiveClass: "myactive"
+        })
+        var vm = new Vue({
+            el: "#app",
+
+            data: {
+
+            },
+
+            methods: {
+
+            },
+            router
+        })
+    </script>
+</body>
+
+</html>

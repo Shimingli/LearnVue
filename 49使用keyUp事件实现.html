@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+ <!-- vue -->
+ <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ <!-- vue路由 -->
+ <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+</head>
+<body>
+
+    <div  id="app">
+       
+
+        <!-- 监听到文本输入框数据的改变 keyup 监听-->
+       <input type="text" @keyup="getFullName" class="form-control" v-model="firstname" >
+       +
+        
+        <input type="text" @keyup="getLastName" v-model="lastname" id="input" >
+        =
+        
+        <input type="text"  v-model="fullname"  class="form-control">
+        
+       
+    </div>
+    
+    <script>
+    var vm=new Vue({
+        el:"#app",
+
+        data:{
+            firstname:"",
+            lastname:"",
+            fullname:"",
+        },
+        
+        methods: {
+
+            getFullName(){
+                this.fullname=this.firstname+this.lastname;
+            },
+            getLastName(){
+                this.fullname=this.firstname+this.lastname;
+            }
+        },
+    })
+    </script>
+</body>
+</html>

@@ -32,8 +32,8 @@
             <router-link to="/acount/login"> 登陆</router-link>
 
             <router-link to="/acount/register">注册</router-link>
-<!-- 占位符 必须要 -->
-           <router-view></router-view>
+            <!-- 占位符 必须要 -->
+            <router-view></router-view>
         </div>
     </template>
     <script>
@@ -57,9 +57,9 @@
                     // 记住 ，login前面不能加上 / 
                     // 虽然还有另外的方式，但是呢？建议这样使用，然后方便去理解
                     // 使用children属性，实现子路由，同时，子路由的paht前面不要带 / ，如果带了，就永远以根路径开始请求，这样不方便我们用户去理解URL地址
-                    children:[
-                        {path:"login",component:login},
-                        {path:"register",component:register}
+                    children: [
+                        { path: "login", component: login },
+                        { path: "register", component: register }
                     ]
                 },
                 // // 

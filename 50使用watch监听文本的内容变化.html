@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- vue路由 -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+</head>
+
+<body>
+
+    <div id="app">
+
+
+        <input type="text" class="form-control" v-model="firstname">
+        +
+
+        <input type="text" v-model="lastname" id="input">
+        =
+
+        <input type="text" v-model="fullname" class="form-control">
+
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+
+            data: {
+                firstname: "",
+                lastname: "",
+                fullname: "",
+            },
+
+            methods: {
+            },
+            // 使用watch可以监听data中指定数据的变化，然后触发对应的函数   
+            watch: {
+                // 这个方法制定了两个参数,前面是新的，后面是就的
+                "firstname": function (newVald,oldValdd) {
+                    console.log("我改变了哦" + this.firstname)
+                    // 方法一
+                    // this.fullname=this.firstname+this.lastname
+                   console.log("newVal==="+newVald)
+
+                   console.log("oldValdd==="+oldValdd)
+
+                    //  方法二
+                    this.fullname=newVald +"++++"+this.lastname
+                },
+                "lastname": function (newVald,oldVald) {
+                    console.log("我改变了哦" + this.lastname)
+                    // this.fullname = this.firstname + this.lastname
+
+                    this.fullname = this.firstname+"+++"+newVald
+                },
+            },
+        })
+
+    </script>
+</body>
+
+</html>

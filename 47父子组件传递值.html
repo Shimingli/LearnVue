@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- vue路由 -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用属性传递值  -->
+        <tmp :parentmsg="msg" @func="getData"></tmp>
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <h1>你好组件 ---{{parentmsg}}</h1>
+             <!-- 通过定义方法，让子组件给父组件传递值 -->
+            <input type="button" value="向父组件传递值" @click="sendMsg">
+        </div>
+    </template>
+    <script>
+        var tmp = {
+            // 这里不是等号啊 我的哥哥 
+            template: "#tmpl",
+            data() {
+                return {
+                    msg: "我是子组件的值"
+                }
+            },
+            props: ['parentmsg'],
+            methods: {
+                sendMsg(){
+                    this.$emit("func",this.msg)
+                }
+            },
+        }
+
+        var vm = new Vue({
+            el: "#app",
+        
+            data() {
+                return {
+                    msg: "我是父组件中的数据",
+                    msgFormSon: ""
+                }
+            },
+        
+       
+            methods: {
+                //  定义方法，让子组件传递值给父组件
+                getData(data) {
+                    this.msgFormSon = data
+                    // 使用msg的时候一定要用this
+                    console.log(this.msgFormSon)
+                }
+            },
+            components: {
+                tmp
+            }
+        })
+    </script>
+</body>
+
+</html>
