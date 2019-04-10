@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+ <!-- vue -->
+ <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ <!-- vue路由 -->
+ <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+</head>
+<body>
+
+    <div  id="app">
+       
+
+        <!-- 监听到文本输入框数据的改变 keyup 监听-->
+       <input type="text"  class="form-control" v-model="firstname" >
+       +
+        
+        <input type="text" v-model="lastname" id="input" >
+        =
+        
+        <input type="text"  v-model="fullname"  class="form-control">
+        
+       
+
+        <P>{{ fullname}}</P>
+    </div>
+    
+    <script>
+    var vm=new Vue({
+        el:"#app",
+
+        data:{
+            firstname:"",
+            lastname:"",
+         
+        },
+        
+        methods: { 
+
+          
+        },
+        //在computed中，可以定义一些属性，这些属性，叫做计算属性
+        // 本质就是一个方法，我们在使用计算属性的时候，是把他们的名称
+        // 直接当做属性来使用的，并不会把计算属性，当做方法来调用
+        computed: {
+            "fullname":function(){
+                //方法内部中的任何属性发生变化了，都会自动的重新计算
+                //计算属性的求值的结果，会被缓存起来，
+                // 计算属性一定要 return  但是wach 可以不用补
+                return this.firstname+"-"+this.lastname
+            }
+        },
+    })
+    </script>
+</body>
+</html>
