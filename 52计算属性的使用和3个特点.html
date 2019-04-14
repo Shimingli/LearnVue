@@ -51,7 +51,7 @@
             "fullname":function(){
                 //方法内部中的任何属性发生变化了，都会自动的重新计算
                 //计算属性的求值的结果，会被缓存起来，
-                // 计算属性一定要 return  但是wach 可以不用补
+                // 计算属性一定要 return  但是watch中 可以不用
                 return this.firstname+"-"+this.lastname
             }
         },
@@ -59,3 +59,8 @@
     </script>
 </body>
 </html>
+
+<!-- watch compute 和 methods 之间的对比 -->
+<!-- computed 属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算，主要当做属性来使用-->
+<!-- methods 方法表示一个具体的操作，主要是写方法的逻辑 -->
+<!-- watch 一个对象，键是需要观察的表达式，值是对应回调函数，主要用来监听某些特定数据的变化，从而进行某些具体的业务逻辑，可以看作computed和methods的结合体 -->
