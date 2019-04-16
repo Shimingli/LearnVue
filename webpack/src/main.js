@@ -6,9 +6,10 @@
 import $ from 'jquery'
 
 $(function(){
-    $("li:odd").css("backgroundColor","lightblue")
+    // 每次都要重新输入 就是麻烦 修改颜色 
+    $("li:odd").css("backgroundColor","yellow")
     $("li:even").css("backgroundColor",function(){
-        return "#"+"D97634"
+        return "#"+"Dfff00"
     })
 })
 
