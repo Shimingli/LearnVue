@@ -10,7 +10,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, "./dist"),
         //  输出的名称
-        filename: "bundledd.js"
+        filename: "bundle.js"
     },
     //配置环境 这是开发  
     mode: 'development'
