@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --open --port 3001 --contentBase src"
+    "dev2": "webpack-dev-server --open --port 3001 --contentBase src --hot",
+    "dev": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "html-webpack-plugin": "^3.2.0",
     "jquery": "^3.4.0",
     "webpack": "^4.30.0"
   },

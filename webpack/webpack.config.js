@@ -1,5 +1,8 @@
 const path = require("path")
 
+// 在内存中生成HTML页面插件，只要是插件，就比放到 plugins中去
+const htmlplugin=require('html-webpack-plugin')
+
 // webpack 基于node 
 // 这个配置文件 就是一个JS文件，通过node中的模块操作，向外暴露了一个配置对象
 module.exports = {
@@ -13,10 +16,30 @@ module.exports = {
         filename: "bundle.js"
     },
     //配置环境 这是开发  
-    mode: 'development'
+    mode: 'development',
     //这是正式
     // mode: 'production'
 
+    //这是dev-server 命令参数的第二种形式，相对来说，比较麻烦  
+    devServer:{
+//  --open --port 3001 --contentBase src --hot
+      open:true,//自动打开浏览器
+      port:3002,//启动的运行的端口
+      contentBase:"src",//指定托管的根目录
+      hot:true,//启动热更新
+    },
+    plugins:[
+        //创建在内存中生成html页面的插件
+        new  htmlplugin({
+            //指定模板页面，根据指定的页面路径，去生成内存中的页面
+         template:path.join(__dirname,"./src/index.html"),
+         //指定生成的页面的名称
+         filename:"index.html"
+
+        })
+    ]
+      
+    
 }
 
 // 当我们在控制台直接输入 webpack命令执行的时候，webpack做了几个步骤
