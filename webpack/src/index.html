@@ -11,7 +11,14 @@
        <!-- <script src="../dist/bundle.js"></script> -->
         <!-- 打开根路径的bundle，打包成的服务器的地址，项目中找不到，但是可以自动打包 -->
       <!-- webpack-dev-server帮我们打包生成的bundle.js文件，并没有存放到磁盘上，而是在电脑的内存中 -->
-        <!-- <script src="/bundle.js"></script> -->
+       
+      <!-- 当我们使用了 html-webpack-plugin 之后，我们不再需要手动处理 bundle.js,
+        因为插件能帮我们应用 -->
+      <!-- <script src="/bundle.js"></script> -->
+
+     <!-- 导入自己的css  有点延迟加载 css会发生二次请求，不推荐这么导入-->
+     <!-- <link rel="stylesheet" href="./css/index.css"> -->
+
 </head>
 <body>
     <ul>

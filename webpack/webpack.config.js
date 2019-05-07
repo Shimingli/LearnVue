@@ -1,7 +1,10 @@
 const path = require("path")
 
 // 在内存中生成HTML页面插件，只要是插件，就比放到 plugins中去
-const htmlplugin=require('html-webpack-plugin')
+//作用
+//1、自动在内存中根据指定的页面生成一个内存的页面
+//2、自动把打包好的bundle.js 追加到页面中去
+const htmlplugin = require('html-webpack-plugin')
 
 // webpack 基于node 
 // 这个配置文件 就是一个JS文件，通过node中的模块操作，向外暴露了一个配置对象
@@ -21,25 +24,47 @@ module.exports = {
     // mode: 'production'
 
     //这是dev-server 命令参数的第二种形式，相对来说，比较麻烦  
-    devServer:{
-//  --open --port 3001 --contentBase src --hot
-      open:true,//自动打开浏览器
-      port:3002,//启动的运行的端口
-      contentBase:"src",//指定托管的根目录
-      hot:true,//启动热更新
+    devServer: {
+        //  --open --port 3001 --contentBase src --hot
+        open: true,//自动打开浏览器
+        port: 3002,//启动的运行的端口
+        contentBase: "src",//指定托管的根目录
+        hot: true,//启动热更新
     },
-    plugins:[
+    plugins: [
         //创建在内存中生成html页面的插件
-        new  htmlplugin({
+        new htmlplugin({
             //指定模板页面，根据指定的页面路径，去生成内存中的页面
-         template:path.join(__dirname,"./src/index.html"),
-         //指定生成的页面的名称
-         filename:"index.html"
+            template: path.join(__dirname, "./src/index.html"),
+            //指定生成的页面的名称
+            filename: "index.html"
 
         })
-    ]
-      
-    
+    ],
+    //// 2、打开 webpack.config.js 这个配置文件，新建module节点，用于配置所有第三方模块的加载器
+    module: {
+        //所有第三方模块的匹配规则
+        rules: [
+            {
+                //正则
+                //处理css文件第三方的loader的规则
+                test: /\.css$/, use: ["style-loader", "css-loader"]
+            },
+            {
+                //这是配置处理less文件的loader的规则
+                test: /\.less$/, use: ["style-loader", "css-loader", "less-loader"]
+            },
+            {
+                //这是配置处理sass文件的loader的规则
+                test: /\.scss$/, use: ["style-loader", "css-loader", "sass-loader"]
+            }
+
+        ]
+    }
+
+
+
+
 }
 
 // 当我们在控制台直接输入 webpack命令执行的时候，webpack做了几个步骤

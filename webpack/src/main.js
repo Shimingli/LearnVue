@@ -5,6 +5,23 @@
 // 由于ES6的代码，太高级了，浏览器解析不了，所以，这一行执行会报错
 import $ from 'jquery'
 
+//在这里导入 css 样式表 
+// 注意webpack只能打包js类型的文件，无法处理其他非JS的文件
+// 需要手动安装第三方 loader的加载器
+import "./css/index.css"
+// 处理less的文件 
+//安装npm i less-loader -D
+//安装npm i less
+import "./css/index.less"
+
+//需要loader
+//安装npm i sass-loader -D
+//安装内部依赖 npm i node-sass -D   最好使用 cnpm i node-sass-D
+import "./css/index.scss"
+
+// 1、需要安装 npm i style-loader css-loader -D
+// 2、打开 webpack.config.js 这个配置文件，新建module节点，用于配置所有第三方模块的加载器
+
 $(function(){
     // 每次都要重新输入 就是麻烦 修改颜色 
     $("li:odd").css("backgroundColor","yellow")
