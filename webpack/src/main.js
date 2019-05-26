@@ -36,3 +36,13 @@ $(function(){
 
 // 运行的命令格式 ：webpack  要打包的文件的路径  -o  输出文件的路径
 
+
+
+//class是 ES6提供的新的语法，用来实现ES6中面向对象编程
+class P{
+    static info={name:"25",age:20}
+}
+//和 java 实现面向对象的方式完全一样 
+var p=new P()
+
+console.log(P.info)
