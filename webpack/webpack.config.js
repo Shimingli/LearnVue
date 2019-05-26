@@ -57,7 +57,12 @@ module.exports = {
             {
                 //这是配置处理sass文件的loader的规则
                 test: /\.scss$/, use: ["style-loader", "css-loader", "sass-loader"]
+            },
+            {
+                //配置Babel来转换ES的高级语法  
+                test:/\.js$/,use:"babel-loader",exclude:/node_modules/
             }
+
 
         ]
     }
