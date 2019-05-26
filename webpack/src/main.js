@@ -43,6 +43,39 @@ class P{
     static info={name:"25",age:20}
 }
 //和 java 实现面向对象的方式完全一样 
-var p=new P()
+// var p=new P()
 
 console.log(P.info)
+
+
+//在webpack中，默认只能处理一部分ES6的新的语法。一些语法是处理不了的
+//需要借助第三放的loader把高级语法转为低级的语法
+
+
+//通过Babel,帮我们将高级的语法转化为低级的语法 
+// 1、在webpack中，可以运行如下两套的命令，安装两套包去安装 Babel 
+// a、 cnpm i babel-core babel-loader babel-plugin-transform-runtime -D
+// b、 cnpm i babel-preset-env babel-preset-stage-0 -D
+
+// 2、打开webpack 的配置文件，在module节点下的rules数组中，添加一个新的
+//匹配规则
+// 把 node_modules 排除外，
+ // a、 {test:/\.js$/,use:"bable-loader",exclude:/node_modules/}
+ //  b、 在配置babel的loader规则时候，必须把node_modules 目录，通过exclude 排除掉
+ // 因为：1、不排除node_modules拍除外的话，会把node_modules中所有的第三方的JS文件
+ //都打包编译，这样，会非常的消耗Cpu，打包的速度会非常的慢
+//   因为： 2、如果Babel把node—moduls都打包完成了，项目也运行不起来
+
+
+//    3、在项目的根目录中，新建一个叫做 .babelrc 的Babel的配置文件，这个配置文件
+//属于JSON个数，所以在写 .babelrc 配置的时候，必须符合JSON语法规范，不能写注释，字符串必须用双引号
+
+// a、 .bablerc 如下的配置 presets 翻译成语法的意思
+
+// {
+//     "presets" : ["env","stage-0"],
+//     "plugins" : ["transform-runtime"]
+// }
+
+
+
